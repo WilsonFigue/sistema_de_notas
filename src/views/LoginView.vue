@@ -25,7 +25,7 @@
                                 color="indigo"
                                 clearable
                                 prepend-inner-icon="mdi-email"
-                                v-model="usuario.email"
+                                v-model="usuario.email_user"
                             >
                             <!-- AJUSTAR MODELOS  -->
                             </v-text-field>
@@ -87,7 +87,7 @@
                 // Variable de formulario
                 usuario: {
                     // AJUSTAR VARIABLES CON NOMBRES DE CAMPOS EN LA BD
-                    email: '',
+                    email_user: '',
                     password: ''
                 },
                 // Variables para controlar la alerta
@@ -102,12 +102,11 @@
                 .then(response => {
                     // console.log(response)
                     if(response.status==200){
-                        // Se extrae el usuario y token de
-                        // la respuesta que retorna el endpoint de login
+                        // Se extrae el usuario y token de la respuesta que retorna el endpoint de login
                         let datos = {
                             // AJUSTAR RESPONSE.DATA.DATA. CON NOMBRES DE CAMPOS EN LA BD
-                            usuario: response.data.data.name,
-                            email: response.data.data.email,
+                            usuario: response.data.data.name_user,
+                            rol: response.data.data.rol,
                             token: response.data.token
                         }
                         // Guardando datos en el storage y el state
@@ -116,7 +115,7 @@
                             this.$router.push('/admin')
                         } else {
                             // Redireccionando a la pantalla de bienvenida
-                            this.$router.push('/welcome')
+                            this.$router.push('/home')
                         }
                     }
                 })

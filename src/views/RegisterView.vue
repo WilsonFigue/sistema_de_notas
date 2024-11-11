@@ -114,7 +114,7 @@
                         // Guardando datos en el storage y el state
                         this.$store.dispatch('login', datos)
                         // Redireccionando a la pantalla de bienvenida
-                        this.$router.push('/welcome')
+                        this.$router.push('/home')
                     }
                 })
                 .catch(error => {
