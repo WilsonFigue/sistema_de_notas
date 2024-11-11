@@ -4,7 +4,12 @@
       <v-app-bar-nav-icon variant="text" @click.stop="drawer = !drawer"></v-app-bar-nav-icon>
       <v-toolbar-title>Sistema de notas MIAURELIO</v-toolbar-title>
       <v-spacer></v-spacer>
-      <v-btn icon="mdi-home" to="/"></v-btn>
+      <template  v-if="this.$store.getters.getUsuario==null">
+        <v-btn icon="mdi-home" to="/"></v-btn>
+      </template>
+      <template v-if="this.$store.getters.getUsuario!==null">
+        <v-btn icon="mdi-home" to="/home"></v-btn>
+      </template>
     </v-app-bar>
 
     <v-navigation-drawer color="deep-purple-darken-1" v-model="drawer" permanent>
@@ -16,18 +21,20 @@
         <template v-if="this.$store.getters.getUsuario!==null">
           <template v-if="this.$store.getters.getRol=='admin'">
             <v-list-item link to="/admin" title="Inicio" prepend-icon="mdi-home"></v-list-item>
-            <v-list-item link to="/alumnos" title="Alumnos" prepend-icon="mdi-home"></v-list-item>
-            <v-list-item link to="/profesores" title="Profesores" prepend-icon="mdi-home"></v-list-item>
-            <v-list-item link to="/grados" title="Grados" prepend-icon="mdi-home"></v-list-item>
-            <v-list-item link to="/materias" title="Materias" prepend-icon="mdi-home"></v-list-item>
+            <v-list-item link to="/usuarios" title="Usuarios" prepend-icon="mdi-account-edit"></v-list-item>
+            <v-list-item link to="/alumnos" title="Alumnos" prepend-icon="mdi-school"></v-list-item>
+            <v-list-item link to="/encargados" title="Encargados" prepend-icon="mdi-human-male-boy"></v-list-item>
+            <v-list-item link to="/materias" title="Materias" prepend-icon="mdi-book-edit"></v-list-item>
+            <v-list-item title="Logout" prepend-icon="mdi-logout" @click="logout"></v-list-item>
           </template>
           <template v-if="this.$store.getters.getRol!=='admin'">
-          </template>
             <v-list-item link to="/" title="Inicio" prepend-icon="mdi-home"></v-list-item>
             <v-list-item link to="/" title="Mis clases" prepend-icon="mdi-home"></v-list-item>
             <v-list-item link to="/" title="Asistencia" prepend-icon="mdi-home"></v-list-item>
             <v-list-item link to="/" title="Actividades" prepend-icon="mdi-home"></v-list-item>
             <v-list-item link to="/" title="Notas" prepend-icon="mdi-home"></v-list-item>
+            <v-list-item title="Logout" prepend-icon="mdi-logout" @click="logout"></v-list-item>
+          </template>
         </template>
       </v-list>
     </v-navigation-drawer>
@@ -62,7 +69,7 @@ export default {
       if(datos){
         // Si hay data en el storage se valida el acceso
         this.$store.dispatch('login', JSON.parse(datos));
-        this.$router.push('/welcome')
+        this.$router.push('/home')
         console.log(datos)
       } else {
         // Si no hay data se redirecciona al login
