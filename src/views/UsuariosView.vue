@@ -79,7 +79,7 @@
                                     <th>
                                         <v-btn-group>
                                             <!-- <v-btn icon="mdi-eye" color="indigo" @click="obtenerUsuario(usuario.id_user, 1)"></v-btn> -->
-                                            <!-- <v-btn icon="mdi-pencil" color="green" @click="obtenerUsuario(usuario.id_user, 2)"></v-btn> -->
+                                            <v-btn icon="mdi-pencil" color="green" @click="obtenerUsuario(usuario.id_user, 2)"></v-btn>
                                             <v-btn icon="mdi-delete" color="red" @click="eliminarUsuario(usuario.id_user)"></v-btn>
                                         </v-btn-group>
                                     </th>
@@ -116,9 +116,9 @@
         transition="dialog-top-transition"
         width="500"
         >
-        <v-card title="Editar" subtitle="Datos del producto">
+        <v-card title="Editar contraseña" subtitle="Escribir nueva contraseña">
             <v-card-text>
-                <v-text-field 
+                <!-- <v-text-field 
                     label="Nombre" 
                     maxlength="50" 
                     counter 
@@ -127,8 +127,8 @@
                     placeholder="Nombre del producto" 
                     v-model="datos.name_user"
                 >
-                </v-text-field>
-                <v-text-field 
+                </v-text-field> -->
+                <!-- <v-text-field 
                     label="Correo" 
                     maxlength="50" 
                     counter color="indigo" 
@@ -136,17 +136,28 @@
                     placeholder="correo@ejemplo.com" 
                     v-model="datos.email_user"
                 >
-                </v-text-field>
+                </v-text-field> -->
                 <v-text-field 
-                    label="Contraseña" 
+                    label="Contraseña nueva" 
                     maxlength="50" 
                     counter color="indigo" 
-                    clearable 
+                    clearable
+                    required 
                     placeholder="*********" 
-                    v-model="datos.password"
+                    v-model="cambio.password"
                 >
                 </v-text-field>
-                <v-select
+                <v-text-field 
+                    label="Confirmar contraseña" 
+                    maxlength="50" 
+                    counter color="indigo" 
+                    clearable
+                    required 
+                    placeholder="*********" 
+                    v-model="cambio.password_confirmation"
+                >
+                </v-text-field>
+                <!-- <v-select
                     color="indigo"
                     label="Categoria"
                     :items="roles"
@@ -154,7 +165,7 @@
                     item-value="valor"
                     v-model="datos.rol"
                 >
-                </v-select>
+                </v-select> -->
                 <v-btn
                     prepend-icon="mdi-check"
                     color="indigo"
@@ -177,13 +188,13 @@
         name: 'UsuariosView',
         data(){
             return {
-                dialogUsuario: false,
                 dialogTwo: false,
                 roles: [
                   { titulo: 'Administrador', valor: 'admin' },
                   { titulo: 'Docente', valor: 'docente' },
                 ],
                 datos: {},
+                cambio: {},
                 dialogOne: false,
                 usuario: {
                     name_user: '',
@@ -205,12 +216,12 @@
         methods: {
             // Petición para obtener usuarios registrados
             obtenerUsuarios(){
-                axios.get('http://127.0.0.1:8000/api/usuario/select', this.config)
+                axios.get('http://127.0.0.1:8000/api/usuario/select',this.config)
                 .then(response => {
                     if(response.data.code==200){
                         let res = response.data
                         this.usuarios = res.data
-                        console.log(this.usuarios)
+                        // console.log(this.usuarios)
                     }
                 })
                 .catch(error => console.log('Ha ocurrido un error '+error))
@@ -230,27 +241,19 @@
                 })
                 .catch(error => console.log('Ha ocurrido un error '+error))
             },
-            // Petición para consultar datos de un producto
-            obtenerUsuario(id_user, action){
+            // Petición para consultar datos de un usuario
+            obtenerUsuario(id, action){
                 // Cambiar la visibilidad del modal ver/editar
                 if(action==1){
                     this.dialogOne = true
                 } else {
                     this.dialogTwo = true
                 }
-                // Realizar petición para consultar datos de un producto
-                axios.get(`http://127.0.0.1:8000/api/usuario/find/${id_user}`, this.config)
-                .then(response => {
-                    if(response.data.code==200){
-                        let res = response.data
-                        this.datos = res.data
-                    }
-                })
-                .catch(error => console.log('Ha ocurrido un error '+error))
+                this.datos.id_user = id
             },
             // Petición para modificar datos de un producto
-            modificarUsuario(id_user){
-                axios.put(`http://127.0.0.1:8000/api/producto/update/${id_user}`, this.datos, this.config)
+            modificarUsuario(id){
+                axios.post(`http://127.0.0.1:8000/api/usuario/update-password/${id}`, this.cambio, this.config)
                 .then(response => {
                 if(response.data.code==200){
                         // Cambiar mensaje y visilidad de alerta
@@ -265,8 +268,8 @@
                 .catch(error => console.log('Ha ocurrido un error '+error))
             },
             // Petición para eliminar un producto
-            eliminarUsuario(id_user){
-                axios.delete(`http://127.0.0.1:8000/api/producto/delete/${id_user}`, this.config)
+            eliminarUsuario(id){
+                axios.delete(`http://127.0.0.1:8000/api/usuario/delete/${id}`, this.config)
                 .then(response => {
                     if(response.data.code==200){
                         // Cambiar mensaje y visilidad de alerta
