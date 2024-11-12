@@ -5,6 +5,7 @@ import RegisterView from '@/views/RegisterView.vue'
 import AdminView from '@/views/AdminView.vue'
 import AlumnosView from '@/views/AlumnosView.vue'
 import UsuariosView from '@/views/UsuariosView.vue'
+import MateriasView from '@/views/MateriasView.vue'
 
 const routes = [
   {
@@ -36,6 +37,11 @@ const routes = [
     path: '/alumnos',
     name: 'alumnos',
     component: AlumnosView
+  },
+  {
+    path: '/materias',
+    name: 'materias',
+    component: MateriasView
   },
 ]
 
