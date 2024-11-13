@@ -6,6 +6,7 @@ import AdminView from '@/views/AdminView.vue'
 import AlumnosView from '@/views/AlumnosView.vue'
 import UsuariosView from '@/views/UsuariosView.vue'
 import MateriasView from '@/views/MateriasView.vue'
+import NotasView from '@/views/NotasView.vue'
 
 const routes = [
   {
@@ -42,6 +43,11 @@ const routes = [
     path: '/materias',
     name: 'materias',
     component: MateriasView
+  },
+  {
+    path: '/notas',
+    name: 'notas',
+    component: NotasView
   },
 ]
 

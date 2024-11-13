@@ -107,7 +107,8 @@
                             // AJUSTAR RESPONSE.DATA.DATA. CON NOMBRES DE CAMPOS EN LA BD
                             usuario: response.data.data.name_user,
                             rol: response.data.data.rol,
-                            token: response.data.token
+                            token: response.data.token,
+                            id_docente: response.data.data.id_docente || null
                         }
                         // Guardando datos en el storage y el state
                         this.$store.dispatch('login', datos)

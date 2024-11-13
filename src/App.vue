@@ -32,7 +32,7 @@
             <v-list-item link to="/" title="Mis clases" prepend-icon="mdi-home"></v-list-item>
             <v-list-item link to="/" title="Asistencia" prepend-icon="mdi-home"></v-list-item>
             <v-list-item link to="/" title="Actividades" prepend-icon="mdi-home"></v-list-item>
-            <v-list-item link to="/" title="Notas" prepend-icon="mdi-home"></v-list-item>
+            <v-list-item link to="/notas" title="Notas" prepend-icon="mdi-home"></v-list-item>
             <v-list-item title="Logout" prepend-icon="mdi-logout" @click="logout"></v-list-item>
           </template>
         </template>
