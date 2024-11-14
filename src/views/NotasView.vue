@@ -94,7 +94,7 @@
 
                 <v-row class="justify-center">
                     <v-col cols="12" md="8">
-                        <v-btn block @click="generarNotas"  v-if="selectedAlumnoId !== null && selectedMateriaId !== null && TrimestreId !== null">Generar notas</v-btn>
+                        <v-btn block @click="generarNotas"  v-if="selectedAlumnoId !== null && selectedMateriaId !== null && TrimestreId !== null" :disabled="isDisabled">Generar notas</v-btn>
                     </v-col>
                 </v-row>
 

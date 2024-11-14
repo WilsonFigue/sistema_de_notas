@@ -7,6 +7,7 @@ import AlumnosView from '@/views/AlumnosView.vue'
 import UsuariosView from '@/views/UsuariosView.vue'
 import MateriasView from '@/views/MateriasView.vue'
 import NotasView from '@/views/NotasView.vue'
+import AsistenciaView from '@/views/AsistenciaView.vue'
 import EncargadosView from '@/views/EncargadosView.vue'
 import DocentesView from '@/views/DocentesView.vue'
 
@@ -60,6 +61,11 @@ const routes = [
     path: '/notas',
     name: 'notas',
     component: NotasView
+  },
+  {
+    path: '/asistencias',
+    name: 'asistencias',
+    component: AsistenciaView
   },
 ]
 
