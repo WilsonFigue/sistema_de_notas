@@ -60,7 +60,27 @@
             <v-col cols="9" xs="12" sm="9" md="9" lg="9" xl="9" xxl="9">
                 <v-card>
                     <v-card-text>
-                        <v-table>
+                        <!-- implementando data table -->                        
+                        <v-data-table :headers="headers" :items="usuarios" class="elevation-1"
+                        :items-per-page="10" :search="search" loading-text="Loading... Please wait">
+                            <template v-slot:top> <!-- Cabecera de la tabla -->
+                                <v-toolbar flat>
+                                <v-toolbar-title>LISTADO DE USUARIOS</v-toolbar-title>
+                                </v-toolbar>
+                                <!-- para el filtro de busqueda -->
+                                <v-text-field color="indigo" label="Buscar" clearable v-model="search"></v-text-field>
+                            </template>
+                            <template v-slot:[`item.actions`]="{ item }"> <!-- botones de la tabla -->
+                                <div class="text-center">
+                                <v-btn-group>
+                                    <!-- <v-btn icon="mdi-eye" color="indigo" @click="obtenerUsuario(item.id_user, 1)"></v-btn> -->
+                                    <v-btn icon="mdi-pencil" color="green" @click="obtenerUsuario(item.id_user, 2)"></v-btn>
+                                    <v-btn icon="mdi-delete" color="red" @click="eliminarUsuario(item.id_user)"></v-btn>
+                                </v-btn-group>
+                                </div>
+                            </template>
+                        </v-data-table>
+                        <!-- <v-table>
                             <thead>
                                 <tr>
                                     <th>ID</th>
@@ -78,14 +98,14 @@
                                     <th>{{usuario.rol}}</th>
                                     <th>
                                         <v-btn-group>
-                                            <!-- <v-btn icon="mdi-eye" color="indigo" @click="obtenerUsuario(usuario.id_user, 1)"></v-btn> -->
+                                             <v-btn icon="mdi-eye" color="indigo" @click="obtenerUsuario(usuario.id_user, 1)"></v-btn>
                                             <v-btn icon="mdi-pencil" color="green" @click="obtenerUsuario(usuario.id_user, 2)"></v-btn>
                                             <v-btn icon="mdi-delete" color="red" @click="eliminarUsuario(usuario.id_user)"></v-btn>
                                         </v-btn-group>
                                     </th>
                                 </tr>
                             </tbody>
-                        </v-table>
+                        </v-table> -->
                     </v-card-text>
                 </v-card>
             </v-col>
@@ -205,6 +225,14 @@
                 usuarios: [],
                 alertaEstado: false,
                 mensaje: '',
+                headers: [//esto es para el data table
+                    { title: 'ID', value: 'id_user' },
+                    { title: 'Nombre', value: 'name_user' },
+                    { title: 'Correo', value: 'email_user' },
+                    { title: 'Rol', value: 'rol' },
+                    { title: 'Acciones', value: 'actions', sortable: false, align: 'center' }
+                ],
+                search: '',//para el filtro de busqueda
                 // Configuración de header para todas las peticiones
                 config: {
                     headers: {

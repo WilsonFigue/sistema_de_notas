@@ -154,7 +154,7 @@
                                     <th>{{alumno.apellido_encargado}}</th>
                                     <th>
                                         <v-btn-group>
-                                            <v-btn icon="mdi-eye" color="indigo" @click="obtenerAlumno(alumno.id_alumno, 1)"></v-btn>
+                                            <!-- <v-btn icon="mdi-eye" color="indigo" @click="obtenerAlumno(alumno.id_alumno, 1)"></v-btn> -->
                                             <v-btn icon="mdi-pencil" color="green" @click="obtenerAlumno(alumno.id_alumno, 2)"></v-btn>
                                             <v-btn icon="mdi-delete" color="red" @click="elimniarAlumno(alumno.id_alumno)"></v-btn>
                                         </v-btn-group>
@@ -425,6 +425,14 @@
                 formattedDate: null,
                 selectedFile: null,
                 fileName: '',
+                headers: [//esto es para el data table
+                    { title: 'ID', value: 'id_user' },
+                    { title: 'Nombre', value: 'name_user' },
+                    { title: 'Correo', value: 'email_user' },
+                    { title: 'Rol', value: 'rol' },
+                    { title: 'Acciones', value: 'actions', sortable: false, align: 'center' }
+                ],
+                search: '',//para el filtro de busqueda
                 // Configuración de header para todas las peticiones
                 config: {
                     headers: {
@@ -488,7 +496,7 @@
                 })
                 .catch(error => console.log('Ha ocurrido un error '+error))
             },
-            // Petición para insertar un producto
+            // Petición para insertar un encargado
             obtenerEncargado(){
                 this.dialogEncargado = true
             },

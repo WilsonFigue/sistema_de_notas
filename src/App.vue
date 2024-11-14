@@ -22,8 +22,9 @@
           <template v-if="this.$store.getters.getRol=='admin'">
             <v-list-item link to="/admin" title="Inicio" prepend-icon="mdi-home"></v-list-item>
             <v-list-item link to="/usuarios" title="Usuarios" prepend-icon="mdi-account-edit"></v-list-item>
-            <v-list-item link to="/alumnos" title="Alumnos" prepend-icon="mdi-school"></v-list-item>
             <v-list-item link to="/encargados" title="Encargados" prepend-icon="mdi-human-male-boy"></v-list-item>
+            <v-list-item link to="/alumnos" title="Alumnos" prepend-icon="mdi-school"></v-list-item>
+            <v-list-item link to="/docentes" title="Docentes" prepend-icon="mdi-glasses"></v-list-item>
             <v-list-item link to="/materias" title="Materias" prepend-icon="mdi-book-edit"></v-list-item>
             <v-list-item title="Logout" prepend-icon="mdi-logout" @click="logout"></v-list-item>
           </template>
